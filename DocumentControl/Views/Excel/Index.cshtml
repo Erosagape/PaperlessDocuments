@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Upload Excel Data</h2>
+<form method="post" action="" enctype="multipart/form-data">
+    <input type="file" name="fileUpload" />
+    <input type="submit" value="Upload" />
+    @ViewBag.Message
+</form>
+@if (ViewBag.DataSource != null) {
+    var tb = (System.Data.DataTable)ViewBag.DataSource;
+    if (tb.Rows.Count > 0)
+    {
+        <table border="1">
+            <thead>
+                <tr>
+                    @for (var c = 0; c < tb.Columns.Count; c++)
+                    {
+                        <th>@tb.Rows[0][c].ToString()</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for(var r = 1; r < tb.Rows.Count; r++)
+                    {
+                <tr>
+                    @for (var c = 0; c < tb.Columns.Count; c++)
+                    {
+                        <td>@tb.Rows[r][c].ToString()</td>
+                    }
+                </tr>
+                    }
+            </tbody>
+        </table>        
+    }
+}

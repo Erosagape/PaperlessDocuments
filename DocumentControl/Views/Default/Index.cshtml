@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p>
+    <b>Import Excel files</b>
+    <ul>
+        <li>
+            <a href="@Url.Action("Index","Excel")?Action=ImportCustomers">Customers Data</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","Excel")?Action=ImportDeclare">Declaration Data</a>
+        </li>
+    </ul>
+</p>

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DocumentControl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainConnection" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Server=127.0.0.1;Port=3306;Uid=tawan;pwd="9t;yogm8";database=doccontrol;</Value>
+    </Setting>
+    <Setting Name="MSSQLConnection" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Server=103.225.168.137;User ID=sa;Password='9t;yogm8';Initial Catalog=Paperless;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
