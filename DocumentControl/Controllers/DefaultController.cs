@@ -11,6 +11,11 @@ namespace DocumentControl.Controllers
         // GET: Default
         public ActionResult Index()
         {
+            ViewBag.Message = "Ready";
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"];
+            if(Request.QueryString["Action"]!=null)
+                return View(Request.QueryString["Action"]);
             return View();
         }
     }
