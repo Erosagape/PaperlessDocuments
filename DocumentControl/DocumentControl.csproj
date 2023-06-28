@@ -216,6 +216,7 @@
     <Content Include="Views\Excel\ImportCustomers.cshtml" />
     <Content Include="Views\Excel\ImportDeclare.cshtml" />
     <Content Include="Views\Default\Customers.cshtml" />
+    <Content Include="Views\Default\Declare.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

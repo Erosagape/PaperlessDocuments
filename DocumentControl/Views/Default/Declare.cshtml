@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Declare Lists";
+    string sqlw = "";
+    if (Request.QueryString["declareno"] != null)
+    {
+        sqlw += string.Format(" declareno='{0}'",Request.QueryString["declareno"]);
+    }
+    if (Request.QueryString["year"] != null)
+    {
+        if (sqlw != "")
+        {
+            sqlw += " AND ";
+        }
+
+        sqlw += string.Format(" datayear='{0}'", Request.QueryString["year"]);
+    }
+    if (Request.QueryString["month"] != null)
+    {
+        if (sqlw != "")
+        {
+            sqlw += " AND ";
+        }
+
+        sqlw += string.Format(" datamonth='{0}'", Request.QueryString["month"]);
+    }
+    if (Request.QueryString["referenceno"] != null)
+    {
+        if (sqlw != "")
+        {
+            sqlw += " AND ";
+        }
+        sqlw += string.Format(" referenceno='{0}'", Request.QueryString["declareno"]);
+    }
+    if (sqlw != "")
+    {
+        sqlw = " WHERE " + sqlw;
+    }
+    sqlw += " ORDER BY DataYear,DataMonth,declareno";
+    var result = DocumentControl.Models.AppManager.ExecuteDataTable("SELECT * FROM CounterDeclare " +sqlw);
+    var tb = new System.Data.DataTable();
+    if (result.isError == false)
+    {
+        tb = (System.Data.DataTable)result.Result;
+    }
+
+}
+<h2>Declare Lists</h2>
+<p>
+    <label>Total =@tb.Rows.Count</label>
+    @if (tb.Rows.Count > 1)
+            {
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        @foreach (System.Data.DataColumn dc in tb.Columns)
+                        {
+                        <th>@dc.ColumnName</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (System.Data.DataRow dr in tb.Rows)
+                    {
+                        var rowid = "row" + dr["rowid"];
+                        <tr>
+                            <td>
+                                <a class="btn btn-info" data-toggle="modal" data-target="#@rowid">Edit</a>
+                            </td>
+                            @foreach (System.Data.DataColumn dc in tb.Columns)
+                            {
+                                <td>@dr[dc.ColumnName]</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+            }
+</p>
