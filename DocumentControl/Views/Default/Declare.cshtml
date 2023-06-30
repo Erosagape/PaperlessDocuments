@@ -2,26 +2,31 @@
 @{
     ViewBag.Title = "Declare Lists";
     string sqlw = "";
+    string decl = "";
+
     if (Request.QueryString["declareno"] != null)
     {
+        decl = Request.QueryString["declareno"];
         sqlw += string.Format(" declareno='{0}'",Request.QueryString["declareno"]);
     }
+    string currYear = (DateTime.Today.Year + 543).ToString();
     if (Request.QueryString["year"] != null)
     {
         if (sqlw != "")
         {
             sqlw += " AND ";
         }
-
+        currYear = Request.QueryString["year"];
         sqlw += string.Format(" datayear='{0}'", Request.QueryString["year"]);
     }
+    string currMonth = DateTime.Today.Month.ToString("00");
     if (Request.QueryString["month"] != null)
     {
         if (sqlw != "")
         {
             sqlw += " AND ";
         }
-
+        currMonth = Request.QueryString["month"];
         sqlw += string.Format(" datamonth='{0}'", Request.QueryString["month"]);
     }
     if (Request.QueryString["referenceno"] != null)
@@ -30,7 +35,7 @@
         {
             sqlw += " AND ";
         }
-        sqlw += string.Format(" referenceno='{0}'", Request.QueryString["declareno"]);
+        sqlw += string.Format(" referenceno='{0}'", Request.QueryString["referenceno"]);
     }
     if (sqlw != "")
     {
@@ -43,18 +48,33 @@
     {
         tb = (System.Data.DataTable)result.Result;
     }
-
 }
 <h2>Declare Lists</h2>
 <p>
+    <div class="row">
+        <div class="col-sm-4">
+            Year:<br />
+            <input type="text" class="form-control" id="txtYear" value="@currYear" />
+        </div>
+        <div class="col-sm-4">
+            Month:<br />
+            <input type="text" class="form-control"  id="txtMonth" value="@currMonth" />
+        </div>
+        <div class="col-sm-4">
+            Declare#:<br />
+            <input type="text" class="form-control"  id="txtDeclare" value="@decl" />
+        </div>
+    </div>
+    <input type="button" class="btn btn-primary" value="Search" onclick="SearchData()"/>
+</p>
+<p>
     <label>Total =@tb.Rows.Count</label>
-    @if (tb.Rows.Count > 1)
+    @if (tb.Rows.Count >= 1)
             {
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
                         @foreach (System.Data.DataColumn dc in tb.Columns)
                         {
                         <th>@dc.ColumnName</th>
@@ -66,9 +86,6 @@
                     {
                         var rowid = "row" + dr["rowid"];
                         <tr>
-                            <td>
-                                <a class="btn btn-info" data-toggle="modal" data-target="#@rowid">Edit</a>
-                            </td>
                             @foreach (System.Data.DataColumn dc in tb.Columns)
                             {
                                 <td>@dr[dc.ColumnName]</td>
@@ -80,3 +97,18 @@
         </div>
             }
 </p>
+<script type="text/javascript">
+    function SearchData() {
+        var str = '';
+        if ($('#txtYear').val() !== '') {
+            str += '&Year='+$('#txtYear').val();
+        }
+        if ($('#txtMonth').val() !== '') {
+            str += '&Month=' + $('#txtMonth').val();
+        }
+        if ($('#txtDeclare').val() !== '') {
+            str += '&DeclareNo=' + $('#txtDeclare').val();
+        }
+        window.location.href = '@Url.Action("Index","Default")?Action=Declare' + str;
+    }
+</script>

@@ -55,6 +55,11 @@ namespace DocumentControl.Controllers
                                     int rowprocess = 0;
                                     for(int i = rowstart; i < tbl.Rows.Count; i++)
                                     {
+                                        string pk = Request.Form["primarykey"];
+                                        if (pk != "")
+                                        {
+                                            cn.Execute("DELETE FROM " + Request.Form["tablename"] + " WHERE " + Request.Form[pk] + "=" + String.Format("'{0}'",tbl.Rows[i][Convert.ToInt32(Request.Form[pk.Replace("fld","col")])]));
+                                        }
                                         string sql = "INSERT INTO " + Request.Form["tablename"];
                                         string sqlh = "";
                                         int j = 0;
@@ -78,7 +83,15 @@ namespace DocumentControl.Controllers
                                                 if(Request.Form["typ"+ j].Equals("POS"))
                                                 {
                                                     var pos = idx.Split(',');
-                                                    sqld += string.Format("'{0}'", tbl.Rows[Convert.ToInt32(pos[0])][Convert.ToInt32(pos[1])].ToString());
+                                                    if (pos.Length < 3)
+                                                    {
+                                                        sqld += string.Format("'{0}'", tbl.Rows[Convert.ToInt32(pos[0])][Convert.ToInt32(pos[1])].ToString());
+                                                    } else
+                                                    {
+                                                        var t = tbl.Rows[Convert.ToInt32(pos[0])][Convert.ToInt32(pos[1])].ToString().Split(' ');
+                                                        sqld += string.Format("'{0}'", t[Convert.ToInt32(pos[2])]);
+                                                    }
+                                                    
                                                 } else
                                                 {
                                                     sqld += string.Format("'{0}'", tbl.Rows[i][Convert.ToInt32(idx)].ToString());

@@ -2,146 +2,7 @@
 @{
     ViewBag.Title = "Import Declare";
 }
-
 <h2>Import Declare</h2>
-<form method="post" action="@Url.Action("ImportData","Excel")" enctype="multipart/form-data">
-    <input type="file" name="fileUpload" />
-    <input type="submit" value="Upload" />
-    @ViewBag.Message<br />
-    Sheet No : <input type="number" name="sheetno" value="0" /> <br />
-    Start At Row : <input type="number" name="rowstart" value="7" /> <br />
-    Table : <input type="text" name="tablename" value="CounterDeclare" />
-    <input type="hidden" name="returnto" value="ImportDeclare" />
-    <b>Mapping Field</b>
-    <table>
-        <tr>
-            <td>
-                <input type="text" name="fld0" value="datatype" />
-                <input type="text" name="typ0" value="FIX" />
-            </td>
-            <td>
-                <input type="text" name="col0" value="" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld1" value="datayear" />
-                <input type="text" name="typ1" value="FIX" />
-            </td>
-            <td>
-                <input type="text" name="col1" value="" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld2" value="datamonth" />
-                <input type="text" name="typ2" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col2" value="1" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld3" value="doctype" />
-                <input type="text" name="typ3" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col3" value="2" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld4" value="referenceno" />
-                <input type="text" name="typ4" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col4" value="3" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld5" value="declareno" />
-                <input type="text" name="typ5" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col5" value="4" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld6" value="customsport" />
-                <input type="text" name="typ6" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col6" value="5" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld7" value="shippername" />
-                <input type="text" name="typ7" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col7" value="6" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld8" value="shipperagentname" />
-                <input type="text" name="typ8" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col8" value="7" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld9" value="shipperagentid" />
-                <input type="text" name="typ9" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col9" value="8" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld10" value="shipperagentcontact" />
-                <input type="text" name="typ10" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col10" value="9" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld11" value="declarestatus" />
-                <input type="text" name="typ11" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col11" value="10" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld12" value="companycode" />
-                <input type="text" name="typ12" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col12" value="11" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="fld13" value="boxlocation" />
-                <input type="text" name="typ13" value="IDX" />
-            </td>
-            <td>
-                <input type="text" name="col13" value="12" />
-            </td>
-        </tr>
-    </table>
-</form>
 @if (ViewBag.DataSource != null)
 {
     var tb = (System.Data.DataTable)ViewBag.DataSource;
@@ -170,3 +31,151 @@
         </table>
     }
 }
+else
+{
+    <form method="post" action="@Url.Action("ImportData","Excel")" enctype="multipart/form-data">
+        <input type="file" name="fileUpload" />
+        <input type="submit" value="Upload" />
+        @ViewBag.Message<br />
+        Sheet No : <input type="number" name="sheetno" value="0" /> <br />
+        Start At Row : <input type="number" name="rowstart" value="7" /> <br />
+        Table : <input type="text" name="tablename" value="CounterDeclare" />
+        <input type="hidden" name="returnto" value="ImportDeclare" />
+        <input type="hidden" name="primarykey" value="fld4" />
+        <b>Mapping Field</b>
+        <table>
+            <tr>
+                <td>
+                    <input type="text" name="fld0" value="datatype" />
+                    <input type="text" name="typ0" value="POS" />
+                </td>
+                <td>
+                    <input type="text" name="col0" value="0,0,0" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld1" value="datayear" />
+                    <input type="text" name="typ1" value="POS" />
+                </td>
+                <td>
+                    <input type="text" name="col1" value="2,4,1" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld2" value="datamonth" />
+                    <input type="text" name="typ2" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col2" value="1" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld3" value="doctype" />
+                    <input type="text" name="typ3" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col3" value="2" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld4" value="referenceno" />
+                    <input type="text" name="typ4" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col4" value="3" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld5" value="declareno" />
+                    <input type="text" name="typ5" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col5" value="4" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld6" value="customsport" />
+                    <input type="text" name="typ6" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col6" value="5" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld7" value="shippername" />
+                    <input type="text" name="typ7" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col7" value="6" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld8" value="shipperagentname" />
+                    <input type="text" name="typ8" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col8" value="7" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld9" value="shipperagentid" />
+                    <input type="text" name="typ9" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col9" value="8" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld10" value="shipperagentcontact" />
+                    <input type="text" name="typ10" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col10" value="9" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld11" value="declarestatus" />
+                    <input type="text" name="typ11" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col11" value="10" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld12" value="companycode" />
+                    <input type="text" name="typ12" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col12" value="11" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="fld13" value="boxlocation" />
+                    <input type="text" name="typ13" value="IDX" />
+                </td>
+                <td>
+                    <input type="text" name="col13" value="12" />
+                </td>
+            </tr>
+        </table>
+    </form>
+}
+<script type="text/javascript">
+    var msg = '@ViewBag.Message';
+    if (msg !== 'Ready') {
+        alert(msg);
+    }
+</script>
